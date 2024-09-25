@@ -33,5 +33,5 @@ build/
 
 ### VS Code ###
 .vscode/
-src/.env
+# 민감한 정보가 담긴 파일들을 무시
 src/.env
