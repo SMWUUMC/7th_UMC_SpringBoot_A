@@ -13,8 +13,9 @@ import java.util.*;
 
 @Entity
 @Getter
+@Setter
 @Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class Member extends BaseEntity {
     @Id
@@ -60,4 +61,9 @@ public class Member extends BaseEntity {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Review> reviewList = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Member [id=" + id + ", name=" + name + ", email=" + email + ", point =" + point+"]";
+    }
 }
