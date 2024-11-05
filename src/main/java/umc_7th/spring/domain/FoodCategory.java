@@ -3,9 +3,6 @@ package umc_7th.spring.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import umc_7th.spring.domain.common.BaseEntity;
-import umc_7th.spring.domain.mapping.MemberPrefer;
-
-import java.util.List;
 
 @Entity
 @Getter
