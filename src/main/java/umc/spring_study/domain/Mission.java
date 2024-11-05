@@ -22,4 +22,8 @@ public class Mission extends BaseEntity {
     private LocalDate deadline;
 
     private String missionSpec;
+
+    @ManyToOne
+    @JoinColumn(name = "store_id")
+    private Store store;
 }
