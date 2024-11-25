@@ -27,5 +27,6 @@ public class StoreQueryServiceImpl implements StoreQueryService {
         filteredStores.forEach(store -> System.out.println("Store: " + store.getName()));
         filteredStores.forEach(store-> Hibernate.initialize(store.getRegion()));
         return filteredStores;
+
     }
 }

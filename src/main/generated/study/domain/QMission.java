@@ -27,13 +27,15 @@ public class QMission extends EntityPathBase<Mission> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
 
-    public final DatePath<java.time.LocalDate> deadline = createDate("deadline", java.time.LocalDate.class);
+    public final DateTimePath<java.time.LocalDateTime> deadline = createDateTime("deadline", java.time.LocalDateTime.class);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final ListPath<study.domain.mapping.MemberMission, study.domain.mapping.QMemberMission> memberMissionList = this.<study.domain.mapping.MemberMission, study.domain.mapping.QMemberMission>createList("memberMissionList", study.domain.mapping.MemberMission.class, study.domain.mapping.QMemberMission.class, PathInits.DIRECT2);
 
     public final StringPath missionSpec = createString("missionSpec");
+
+    public final QRegion region;
 
     public final NumberPath<Integer> reward = createNumber("reward", Integer.class);
 
@@ -60,6 +62,7 @@ public class QMission extends EntityPathBase<Mission> {
 
     public QMission(Class<? extends Mission> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
+        this.region = inits.isInitialized("region") ? new QRegion(forProperty("region")) : null;
         this.store = inits.isInitialized("store") ? new QStore(forProperty("store"), inits.get("store")) : null;
     }
 

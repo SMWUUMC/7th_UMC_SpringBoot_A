@@ -6,6 +6,7 @@ import study.domain.common.*;
 import study.domain.mapping.MemberMission;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Entity
@@ -21,7 +22,7 @@ public class Mission extends BaseEntity {
 
     private Integer reward;
 
-    private LocalDate deadline;
+    private LocalDateTime deadline;
 
     @Column(length = 500)
     private String missionSpec;
@@ -29,6 +30,10 @@ public class Mission extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
     private Store store;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "region_id")
+    private Region region;
 
     @OneToMany(mappedBy = "mission", cascade = CascadeType.ALL)
     private List<MemberMission> memberMissionList = new ArrayList<>();
