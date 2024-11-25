@@ -2,6 +2,9 @@ package study.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import study.domain.enums.*;
 import study.domain.common.*;
 import study.domain.mapping.MemberAgree;
@@ -14,6 +17,8 @@ import java.util.*;
 @Entity
 @Getter
 @Setter
+@DynamicInsert
+@DynamicUpdate
 @Builder
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
@@ -48,6 +53,7 @@ public class Member extends BaseEntity {
     //@Column(nullable = false, length = 50)
     private String email;
 
+    @ColumnDefault("0")
     private Integer point;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
