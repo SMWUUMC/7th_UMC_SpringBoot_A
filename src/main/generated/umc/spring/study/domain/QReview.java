@@ -24,7 +24,7 @@ public class QReview extends EntityPathBase<Review> {
 
     public final umc.spring.study.domain.Base.QBaseEntity _super = new umc.spring.study.domain.Base.QBaseEntity(this);
 
-    public final StringPath body = createString("body");
+    public final StringPath content = createString("content");
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
@@ -33,9 +33,9 @@ public class QReview extends EntityPathBase<Review> {
 
     public final QMember member;
 
-    public final ListPath<ReviewImage, QReviewImage> reviewImageList = this.<ReviewImage, QReviewImage>createList("reviewImageList", ReviewImage.class, QReviewImage.class, PathInits.DIRECT2);
+    public final NumberPath<Float> rating = createNumber("rating", Float.class);
 
-    public final NumberPath<Float> score = createNumber("score", Float.class);
+    public final ListPath<ReviewImage, QReviewImage> reviewImageList = this.<ReviewImage, QReviewImage>createList("reviewImageList", ReviewImage.class, QReviewImage.class, PathInits.DIRECT2);
 
     public final QStore store;
 

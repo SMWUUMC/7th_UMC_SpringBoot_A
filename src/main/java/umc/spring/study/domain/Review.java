@@ -8,6 +8,7 @@ import java.util.*;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -18,9 +19,9 @@ public class Review extends BaseEntity {
     private Long id;
 
     @Column(columnDefinition = "TEXT")
-    private String body;
+    private String content;
 
-    private Float score;
+    private Float rating;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
