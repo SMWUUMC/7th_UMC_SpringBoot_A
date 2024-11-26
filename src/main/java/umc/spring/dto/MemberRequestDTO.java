@@ -6,7 +6,7 @@ import java.util.List;
 
 public class MemberRequestDTO {
     @Getter
-    private static class JoinDTO{
+    public static class JoinDTO{
         String name;
         Integer gender;
         Integer birthYear;
