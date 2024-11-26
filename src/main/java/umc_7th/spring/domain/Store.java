@@ -44,4 +44,12 @@ public class Store extends BaseEntity {
                 ", region=" + (region != null ? region.getName() : "N/A") + // region의 이름 출력
                 '}';
     }
+    // 1. 특정 지역에 가게 추가하기 API
+    public void setRegion(Region region) {
+        if (this.region != null) {
+            region.getStoreList().remove(this);
+        }
+        this.region = region;
+        region.getStoreList().add(this);
+    }
 }

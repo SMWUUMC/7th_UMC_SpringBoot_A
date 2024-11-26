@@ -33,4 +33,10 @@ public class Review extends BaseEntity {
 
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL)
     private List<ReviewImage> reviewImageList;
+
+    // 2. 가게에 리뷰 추가하기 API
+    public void setStore (Store store) {
+        this.store = store;
+        store.getReviewList().add(this);
+    }
 }
