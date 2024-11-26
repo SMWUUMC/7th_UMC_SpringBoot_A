@@ -21,4 +21,22 @@ public class MissionResponseDTO {
         String storeName;
         LocalDateTime deadline;
     }
+
+    //가게에 미션 추가하기 API
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class AssignMissionToStoreResultDto {
+        Long missionId;
+        LocalDateTime createdAt;
+    }
+
+    //미션 상태 변경 API
+    @Getter
+    @AllArgsConstructor
+    public static class changeMissionStatusResultDto {
+        Long memberMissionId;
+        LocalDateTime createdAt;
+    }
 }

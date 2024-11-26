@@ -1,13 +1,11 @@
 package study.converter;
 
-import study.domain.Member;
 import study.domain.Review;
-import study.domain.Store;
 import study.web.dto.ReviewRequestDTO;
 import study.web.dto.ReviewResponseDTO;
 
 public class ReviewConverter {
-    public static Review toReview(ReviewRequestDTO.JoinDTO request){
+    public static Review toReview(ReviewRequestDTO.PostReviewDTO request){
         return Review.builder()
                 .score(request.getScore())
                 .body(request.getBody())
@@ -16,8 +14,8 @@ public class ReviewConverter {
                 .build();
     }
 
-    public static ReviewResponseDTO.JoinResultDTO toReviewResponseDTO(Review review){
-        return ReviewResponseDTO.JoinResultDTO.builder()
+    public static ReviewResponseDTO.PostReviewResultDTO toPostReviewResultDTO(Review review){
+        return ReviewResponseDTO.PostReviewResultDTO.builder()
                 .reviewId(review.getId())
                 .createdAt(review.getCreatedAt())
                 .build();

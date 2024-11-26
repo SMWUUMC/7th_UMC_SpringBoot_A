@@ -16,11 +16,6 @@ public class StoreQueryServiceImpl implements StoreQueryService {
     private final StoreRepository storeRepository;
 
     @Override
-    public Optional<Store> findStore(Long id) {
-        return storeRepository.findById(id);
-    }
-
-    @Override
     public List<Store> findStoresByNameAndScore(String name, Float score){
         List<Store> filteredStores = storeRepository.dynamicQueryWithBooleanBuilder(name, score);
 
@@ -28,5 +23,10 @@ public class StoreQueryServiceImpl implements StoreQueryService {
         filteredStores.forEach(store-> Hibernate.initialize(store.getRegion()));
         return filteredStores;
 
+    }
+
+    @Override
+    public boolean isValid(Long id) {
+        return storeRepository.existsById(id);
     }
 }

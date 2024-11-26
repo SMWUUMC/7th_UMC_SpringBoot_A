@@ -11,6 +11,7 @@ import java.util.*;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -37,4 +38,11 @@ public class Mission extends BaseEntity {
 
     @OneToMany(mappedBy = "mission", cascade = CascadeType.ALL)
     private List<MemberMission> memberMissionList = new ArrayList<>();
+
+    public void setStore(Store store) {
+        if(this.store != null)
+            this.store.getMissionList().remove(this);
+        this.store = store;
+        store.getMissionList().add(this);
+    }
 }
