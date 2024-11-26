@@ -10,6 +10,7 @@ import umc.spring.study.domain.enums.MissionStatus;
 @Entity
 @Getter
 @Builder
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class MemberMission extends BaseEntity {
@@ -19,7 +20,7 @@ public class MemberMission extends BaseEntity {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "VARCHAR(15) DEFAULT 'CHALLENGING'")
+    @Column(columnDefinition = "VARCHAR(15) DEFAULT 'BEFORE'")
     private MissionStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)
