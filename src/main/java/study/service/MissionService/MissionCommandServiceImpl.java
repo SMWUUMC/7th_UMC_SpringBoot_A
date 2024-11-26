@@ -8,6 +8,7 @@ import study.converter.MissionConverter;
 import study.domain.*;
 import study.domain.enums.MissionStatus;
 import study.domain.mapping.MemberMission;
+import study.repository.MemberMissionRepository.MemberMissionRepository;
 import study.repository.MemberRepository.MemberRepository;
 import study.repository.MissionRepository.MissionRepository;
 import study.repository.StoreRepository.StoreRepository;
@@ -22,7 +23,7 @@ public class MissionCommandServiceImpl implements MissionCommandService {
     private final MissionRepository missionRepository;
     private final StoreRepository storeRepository;
     private final MemberRepository memberRepository;
-    private final MemberMissionRepository
+    private final MemberMissionRepository memberMissionRepository;
 
     @Override
     public Mission assignMissionToStore(MissionRequestDTO.AssignMissionToStoreDto request) {

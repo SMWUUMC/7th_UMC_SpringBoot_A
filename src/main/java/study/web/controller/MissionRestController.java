@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import study.apiPayload.ApiResponse;
+import study.converter.MemberMissionConverter;
 import study.domain.mapping.MemberMission;
 import study.service.MissionService.MissionCommandService;
 import study.web.dto.MissionRequestDTO;
@@ -20,6 +21,6 @@ public class MissionRestController {
                                                                                             @RequestBody @Valid MissionRequestDTO.changeMissionStatusDto request){
         request.setMissionId(missionId);
         MemberMission mission = missionCommandService.changeMissionStatus(request);
-        return ApiResponse.onSuccess(MemberMissionConverter.)
+        return ApiResponse.onSuccess(MemberMissionConverter.toChangeMissionStatusResultDto(mission));
     }
 }

@@ -1,5 +1,6 @@
 package study.web.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import study.apiPayload.ApiResponse;
@@ -21,7 +22,7 @@ public class StoreRestController {
     private final MissionCommandService missionCommandService;
     @PostMapping("/{store_id}/reviews")
     public ApiResponse<ReviewResponseDTO.PostReviewResultDTO> postReview(@PathVariable("store_id") Long storeId,
-                                                                         @RequestBody ReviewRequestDTO.PostReviewDTO request) {
+                                                                         @RequestBody @Valid ReviewRequestDTO.PostReviewDTO request) {
         request.setStoreId(storeId);
         Review review = reviewCommandService.createReview(request);
         return ApiResponse.onSuccess(ReviewConverter.toPostReviewResultDTO(review));
@@ -29,7 +30,7 @@ public class StoreRestController {
 
     @PostMapping("/{store_id}/missions")
     public ApiResponse<MissionResponseDTO.AssignMissionToStoreResultDto> postMission(@PathVariable("store_id") Long storeId,
-                                                                                     @RequestBody MissionRequestDTO.AssignMissionToStoreDto request) {
+                                                                                     @RequestBody @Valid MissionRequestDTO.AssignMissionToStoreDto request) {
         request.setStoreId(storeId);
         Mission mission = missionCommandService.assignMissionToStore(request);
         return ApiResponse.onSuccess(MissionConverter.toAssignMissionToStoreResultDto(mission));

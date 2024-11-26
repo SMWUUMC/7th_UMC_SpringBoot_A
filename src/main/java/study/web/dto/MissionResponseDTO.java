@@ -33,7 +33,9 @@ public class MissionResponseDTO {
     }
 
     //미션 상태 변경 API
+    @Builder
     @Getter
+    @NoArgsConstructor
     @AllArgsConstructor
     public static class changeMissionStatusResultDto {
         Long memberMissionId;
