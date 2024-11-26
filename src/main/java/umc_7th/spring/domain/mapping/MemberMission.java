@@ -28,4 +28,10 @@ public class MemberMission extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mission_id")
     private Mission mission;
+
+    // 4. 가게의 미션을 도전 중인 미션에 추가 (미션 도전하기) API
+    public void setMission(Mission mission) {
+        this.mission = mission;
+        mission.getMemberMissionList().add(this);
+    }
 }

@@ -32,11 +32,10 @@ public enum ErrorStatus implements BaseErrorCode {
 
     // 4. 가게의 미션을 도전 중인 미션에 추가 (미션 도전하기) API
     MISSION_NOT_FOUND(HttpStatus.NOT_FOUND, "MISSION4001", "미션이 없습니다."),
-    MISSION_ONGOING(HttpStatus.BAD_REQUEST, "MISSION4002", "이미 진행 중인 미션입니다."),
+    MISSION_CHALLENGING(HttpStatus.BAD_REQUEST, "MISSION4002", "이미 진행 중인 미션입니다."),
 
     // 예시,,,
     ARTICLE_NOT_FOUND(HttpStatus.NOT_FOUND, "ARTICLE4001", "게시글이 없습니다.");
-
 
     private final HttpStatus httpStatus;
     private final String code;
