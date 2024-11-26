@@ -19,8 +19,9 @@ public class MissionRestController {
 
     @PostMapping("/{missionId}") // 4. 가게의 미션을 도전 중인 미션에 추가 (미션 도전하기) API
     public ApiResponse<MissionResponseDTO.createMemberMissionResultDTO> createMemberMission(@RequestBody @Valid MissionRequestDTO.createMemberMissionDTO request,
+                                                                                            @RequestParam(name = "memberId") Long memberId,
                                                                                             @PathVariable(name = "missionId") Long missionId) {
-        MemberMission memberMission = missionCommandService.createMemberMission(missionId, request);
+        MemberMission memberMission = missionCommandService.createMemberMission(memberId, missionId, request);
 
         return ApiResponse.onSuccess(MissionConverter.createMemberMissionResultDTO(memberMission));
 
