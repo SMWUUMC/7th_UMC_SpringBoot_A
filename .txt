@@ -1,0 +1,105 @@
+plugins {
+   id 'java'
+   id 'org.springframework.boot' version '3.3.4'
+   id 'io.spring.dependency-management' version '1.1.6'
+   id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
+}
+
+group = 'umc_7th'
+version = '0.0.1-SNAPSHOT'
+
+java {
+   toolchain {
+      languageVersion = JavaLanguageVersion.of(17)
+   }
+}
+
+configurations {
+   compileOnly {
+      extendsFrom annotationProcessor
+   }
+}
+
+repositories {
+   mavenCentral()
+}
+
+dependencies {
+   implementation 'org.springframework.boot:spring-boot-starter-web'
+   implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+   implementation 'org.hibernate.orm:hibernate-core:6.0.2.Final'  // Hibernate 6.0.2 이상
+   implementation 'mysql:mysql-connector-java:8.0.33'  // MySQL 드라이버 추가
+
+   // queryDSL
+   implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+   annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
+   annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+   annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+
+   implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.3'
+   implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.3'
+   implementation 'com.fasterxml.jackson.core:jackson-core:2.13.3'
+
+   compileOnly 'org.projectlombok:lombok:1.18.22'
+   annotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+   implementation 'org.hibernate:hibernate-core:5.6.9.Final'
+
+   implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
+   implementation 'org.springdoc:springdoc-openapi-data-rest:1.6.9'
+
+   annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jpa"
+   annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+   annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+
+   runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
+   compileOnly 'org.projectlombok:lombok'
+   annotationProcessor 'org.projectlombok:lombok'
+   annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+   annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+
+   developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+   testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+sourceSets {
+   main {
+      java {
+         srcDirs = ['src/main/java', 'src/main/resources', 'src/main/generated']
+      }
+      resources{
+         srcDir "${project.projectDir}/src/main/java"
+      }
+   }
+}
+
+test {
+   useJUnitPlatform()
+}
+
+// Querydsl 설정부
+def generated = 'src/main/generated'
+
+querydsl {
+   jpa = true
+   querydslSourcesDir = generated
+}
+sourceSets {
+   main.java.srcDir generated
+}
+
+jar {
+   enabled = false
+}
+
+compileQuerydsl{
+   options.annotationProcessorPath = configurations.querydsl
+}
+
+configurations {
+   compileOnly {
+      extendsFrom annotationProcessor
+   }
+   querydsl.extendsFrom compileClasspath
+}
