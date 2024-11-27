@@ -18,4 +18,7 @@ public class ReviewRequestDTO {
         String body;
         Float score;
     }
+
+    //리뷰 목록 조회
+
 }

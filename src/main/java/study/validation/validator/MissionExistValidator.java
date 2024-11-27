@@ -1,12 +1,10 @@
 package study.validation.validator;
 
-import jakarta.validation.Constraint;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import study.apiPayload.code.status.ErrorStatus;
-import study.repository.MissionRepository.MissionRepository;
 import study.service.MissionService.MissionQueryService;
 import study.validation.annotation.ExistMission;
 
@@ -25,7 +23,7 @@ public class MissionExistValidator implements ConstraintValidator<ExistMission, 
         boolean isValid = missionQueryService.isValid(missionId);
         if(!isValid) {
             constraintValidatorContext.disableDefaultConstraintViolation();
-            constraintValidatorContext.buildConstraintViolationWithTemplate(ErrorStatus.MISSION_NOT_FOUNT.toString()).addConstraintViolation();
+            constraintValidatorContext.buildConstraintViolationWithTemplate(ErrorStatus.MISSION_NOT_FOUND.toString()).addConstraintViolation();
         }
         return false;
     }
