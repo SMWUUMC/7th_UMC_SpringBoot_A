@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-import umc_7th.spring.service.StoreQueryService;
+import umc_7th.spring.service.StoreService.StoreQueryService;
 
 @SpringBootApplication
 @EnableJpaAuditing

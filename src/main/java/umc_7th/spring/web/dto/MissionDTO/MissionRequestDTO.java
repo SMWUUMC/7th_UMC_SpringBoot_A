@@ -2,7 +2,6 @@ package umc_7th.spring.web.dto.MissionDTO;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
-import umc_7th.spring.domain.Member;
 import umc_7th.spring.domain.enums.MissionStatus;
 
 public class MissionRequestDTO {

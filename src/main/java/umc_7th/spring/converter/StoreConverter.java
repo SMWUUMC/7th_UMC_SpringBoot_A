@@ -1,11 +1,14 @@
 package umc_7th.spring.converter;
 
+import org.springframework.data.domain.Page;
 import umc_7th.spring.domain.Mission;
 import umc_7th.spring.domain.Review;
 import umc_7th.spring.web.dto.StoreDTO.StoreRequestDTO;
 import umc_7th.spring.web.dto.StoreDTO.StoreResponseDTO;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class StoreConverter {
 
@@ -32,6 +35,27 @@ public class StoreConverter {
         return StoreResponseDTO.createMissionResultDTO.builder()
                 .missionId(mission.getId())
                 .createdAt(LocalDateTime.now())
+                .build();
+    }
+    public static StoreResponseDTO.ReviewPreViewDTO reviewPreViewDTO(Review review){
+        return StoreResponseDTO.ReviewPreViewDTO.builder()
+                .ownerNickname(review.getMember().getName())
+                .score(review.getScore())
+                .createdAt(review.getCreatedAt().toLocalDate())
+                .body(review.getBody())
+                .build();
+    }
+    public static StoreResponseDTO.ReviewPreViewListDTO reviewPreViewListDTO(Page<Review> reviewList){
+        List<StoreResponseDTO.ReviewPreViewDTO> reviewPreViewDTOList = reviewList.stream()
+                .map(StoreConverter::reviewPreViewDTO).collect(Collectors.toList());
+
+        return StoreResponseDTO.ReviewPreViewListDTO.builder()
+                .isLast(reviewList.isLast())
+                .isFirst(reviewList.isFirst())
+                .totalPage(reviewList.getTotalPages())
+                .totalElements(reviewList.getTotalElements())
+                .listSize(reviewPreViewDTOList.size())
+                .reviewList(reviewPreViewDTOList)
                 .build();
     }
 }
