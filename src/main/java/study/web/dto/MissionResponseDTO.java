@@ -6,14 +6,27 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-
+import java.util.*;
 public class MissionResponseDTO {
     // 개인 미션 조회
     @Builder
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class FindIndividualMissionResultDto {
+    public static class MissionDetailListDto {
+        List<MissionResponseDTO.MissionDetailDto> missionList;
+        Integer listSize;
+        Integer totalPage;
+        Long totalElements;
+        Boolean isFirst;
+        Boolean isLast;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MissionDetailDto {
         Long missionId;
         Long storeId;
         Integer reward;

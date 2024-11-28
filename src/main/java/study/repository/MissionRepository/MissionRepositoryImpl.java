@@ -1,21 +1,22 @@
 package study.repository.MissionRepository;
 
-import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Repository;
 import study.domain.*;
 import study.domain.QMission;
 import study.domain.enums.MissionStatus;
+import study.domain.mapping.MemberMission;
 import study.domain.mapping.QMemberMission;
-import study.web.dto.MissionRequestDTO;
 import study.web.dto.MissionResponseDTO;
 
+import org.springframework.data.domain.Pageable;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import static study.domain.QRegion.region;
 
@@ -29,15 +30,8 @@ public class MissionRepositoryImpl implements MissionRepositoryCustom{
     private final QStore store = QStore.store;
 
     @Override
-    public List<MissionResponseDTO.FindIndividualMissionResultDto> findIndividualChallengingMission(Long memberId){
-        return jpaQueryFactory.select(Projections.constructor(MissionResponseDTO.FindIndividualMissionResultDto.class,
-                        mission.id,
-                        store.id,
-                        mission.reward,
-                        mission.missionSpec,
-                        store.name,
-                        mission.deadline))
-                .from(memberMission)
+    public Page<MemberMission> findIndividualChallengingMission(Long memberId, Pageable pageable){
+        return new PageImpl<>(jpaQueryFactory.selectFrom(memberMission)
                 .join(memberMission.member,member)
                 .join(memberMission.mission,mission)
                 .join(mission.store, store)
@@ -45,19 +39,12 @@ public class MissionRepositoryImpl implements MissionRepositoryCustom{
                         memberMission.status.eq(MissionStatus.CHALLENGING))
                 .orderBy(mission.id.desc())
                 .limit(10)
-                .fetch();
+                .fetch());
     }
 
     @Override
-    public List<MissionResponseDTO.FindIndividualMissionResultDto> findIndividualCompleteMission(Long memberId){
-        return jpaQueryFactory.select(Projections.constructor(MissionResponseDTO.FindIndividualMissionResultDto.class,
-                        mission.id,
-                        store.id,
-                        mission.reward,
-                        mission.missionSpec,
-                        store.name,
-                        Expressions.constant(LocalDateTime.MIN)))
-                .from(memberMission)
+    public Page<MemberMission> findIndividualCompleteMission(Long memberId, Pageable pageable){
+        return new PageImpl<>(jpaQueryFactory.selectFrom(memberMission)
                 .join(memberMission.member,member)
                 .join(memberMission.mission,mission)
                 .join(mission.store, store)
@@ -65,33 +52,25 @@ public class MissionRepositoryImpl implements MissionRepositoryCustom{
                         memberMission.status.eq(MissionStatus.COMPLETE))
                 .orderBy(mission.id.desc())
                 .limit(10)
-                .fetch();
+                .fetch());
     }
 
 
-    //정상 조회 안 됨
     @Override
-    public List<MissionResponseDTO.FindIndividualMissionResultDto> findIndividualClaimableMission(MissionRequestDTO.FindIndividualMissionDto request){
-        return jpaQueryFactory.select(Projections.constructor(MissionResponseDTO.FindIndividualMissionResultDto.class,
-                mission.id,
-                store.id,
-                mission.reward,
-                mission.missionSpec,
-                store.name,
-                mission.deadline))
-                .from(mission)
+    public Page<Mission> findIndividualClaimableMission(Long memberId, Long regionId, Pageable pageable){
+        return new PageImpl<Mission>(jpaQueryFactory.selectFrom(mission)
                 .join(mission.store, store)
                 .join(mission.region, region)
                 .where(
-                        mission.region.id.eq(request.getRegionId()),
+                        mission.region.id.eq(regionId),
                         mission.id.notIn(
                                 JPAExpressions.select(memberMission.mission.id)
                                         .from(memberMission)
-                                        .where(memberMission.member.id.eq(request.getMemberId()))
+                                        .where(memberMission.member.id.eq(memberId)
                         )
-                )
+                ))
                 .orderBy(mission.id.desc())
                 .limit(10)
-                .fetch();
+                .fetch());
     }
 }

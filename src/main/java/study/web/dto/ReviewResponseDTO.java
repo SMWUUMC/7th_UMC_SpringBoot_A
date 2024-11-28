@@ -17,7 +17,7 @@ public class ReviewResponseDTO {
         LocalDateTime createdAt;
     }
 
-    //리뷰 목록조회
+    //가게 리뷰 목록조회
     @Builder
     @Getter
     @NoArgsConstructor
@@ -41,4 +41,5 @@ public class ReviewResponseDTO {
         String body;
         LocalDateTime createdAt;
     }
+
 }

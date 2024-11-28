@@ -1,11 +1,14 @@
 package study.service.MissionService;
 
-import study.web.dto.MissionRequestDTO;
-import study.web.dto.MissionResponseDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import study.domain.Mission;
+import study.domain.enums.MissionStatus;
+import study.domain.mapping.MemberMission;
 
-import java.util.List;
 public interface MissionQueryService {
-    List<MissionResponseDTO.FindIndividualMissionResultDto> findIndividualMissionByMissionStatus(MissionRequestDTO.FindIndividualMissionDto missionDto);
-
+    Page<MemberMission> findIndividualMissionByMissionStatus(Long memberId, MissionStatus missionStatus, Pageable pageable);
+    Page<Mission> findClaimableMission(Long memberId, Long regionId, Pageable pageable);
+    Page<Mission> findMissionListByStore(Long storeId, Pageable pageable);
     boolean isValid(Long id);
 }

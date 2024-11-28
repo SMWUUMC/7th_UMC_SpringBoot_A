@@ -1,13 +1,13 @@
 package study.repository.MissionRepository;
 
+import org.springframework.data.domain.Page;
 import study.domain.Mission;
-import study.domain.enums.MissionStatus;
-import study.web.dto.MissionRequestDTO;
-import study.web.dto.MissionResponseDTO;
+import study.domain.mapping.MemberMission;
 
-import java.util.List;
+import org.springframework.data.domain.Pageable;
+
 public interface MissionRepositoryCustom {
-    List<MissionResponseDTO.FindIndividualMissionResultDto> findIndividualChallengingMission(Long memberId);
-    List<MissionResponseDTO.FindIndividualMissionResultDto> findIndividualCompleteMission(Long memberId);
-    List<MissionResponseDTO.FindIndividualMissionResultDto> findIndividualClaimableMission(MissionRequestDTO.FindIndividualMissionDto request);
+    Page<MemberMission> findIndividualChallengingMission(Long memberId, Pageable pageable);
+    Page<MemberMission> findIndividualCompleteMission(Long memberId, Pageable pageable);
+    Page<Mission> findIndividualClaimableMission(Long memberId, Long regionId, Pageable pageable);
 }
