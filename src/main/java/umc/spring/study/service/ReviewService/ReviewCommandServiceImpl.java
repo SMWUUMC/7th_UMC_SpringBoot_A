@@ -33,8 +33,8 @@ public class ReviewCommandServiceImpl implements ReviewCommandService {
         // Review 객체 생성
         Review review = Review.builder()
                 .store(store)
-                .content(request.getContent())
-                .rating(request.getRating())
+                .body(request.getContent())
+                .score(request.getRating())
                 .build();
 
 
