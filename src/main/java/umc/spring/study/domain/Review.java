@@ -19,9 +19,9 @@ public class Review extends BaseEntity {
     private Long id;
 
     @Column(columnDefinition = "TEXT")
-    private String content;
+    private String body;
 
-    private Float rating;
+    private Float score;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")

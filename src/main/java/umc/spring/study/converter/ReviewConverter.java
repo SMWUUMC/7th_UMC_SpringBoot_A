@@ -9,8 +9,8 @@ public class ReviewConverter {
     // ReviewRequestDTO.CreateReviewDto -> Review 엔티티 변환
     public static Review toReview(ReviewRequestDTO.CreateReviewDto request) {
         return Review.builder()
-                .content(request.getContent())
-                .rating(request.getRating())
+                .body(request.getContent())
+                .score(request.getRating())
                 .build();
     }
 
@@ -19,8 +19,8 @@ public class ReviewConverter {
         return ReviewResponseDTO.ReviewResultDTO.builder()
                 .reviewId(review.getId())
                 .createdAt(review.getCreatedAt()) // BaseEntity의 createdAt
-                .rating(review.getRating())
-                .content(review.getContent())
+                .rating(review.getScore())
+                .content(review.getBody())
                 .build();
     }
 }

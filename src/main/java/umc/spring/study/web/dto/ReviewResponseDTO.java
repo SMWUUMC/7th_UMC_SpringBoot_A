@@ -2,7 +2,9 @@ package umc.spring.study.web.dto;
 
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class ReviewResponseDTO {
 
@@ -17,9 +19,29 @@ public class ReviewResponseDTO {
         LocalDateTime createdAt;
         String content;
         Float rating;
+    }
 
-//        public static ReviewResultDTO success(Long reviewId, LocalDateTime createdAt) {
-//            return new ReviewResultDTO(reviewId, createdAt);
-//        }
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class ReviewPreViewListDTO {
+        List<ReviewPreViewDTO> reviewList;
+        Integer listSize;
+        Integer totalPage;
+        Long totalElements;
+        Boolean isFirst;
+        Boolean isLast;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class ReviewPreViewDTO {
+        String ownerNickname;
+        Float score;
+        String body;
+        LocalDate createdAt;
     }
 }
