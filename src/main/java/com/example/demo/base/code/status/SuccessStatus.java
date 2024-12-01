@@ -10,6 +10,7 @@ import com.example.demo.base.code.ReasonDTO;
 @AllArgsConstructor
 public enum SuccessStatus implements BaseCode {
 
+    // 일반적인 응답
     _OK(HttpStatus.OK, "COMMON200", "성공입니다.");
 
     private final HttpStatus httpStatus;
@@ -19,15 +20,20 @@ public enum SuccessStatus implements BaseCode {
     @Override
     public ReasonDTO getReason() {
         return ReasonDTO.builder()
-                .httpStatus(httpStatus)
-                .code(code)
                 .message(message)
+                .code(code)
                 .isSuccess(true)
                 .build();
     }
 
     @Override
     public ReasonDTO getReasonHttpStatus() {
-        return getReason();
+        return ReasonDTO.builder()
+                .message(message)
+                .code(code)
+                .isSuccess(true)
+                .httpStatus(httpStatus)
+                .build()
+                ;
     }
 }
