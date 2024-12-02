@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import umc.spring.study.domain.enums.MissionStatus;
 
+import java.time.LocalDate;
+
 
 public class MissionResponseDTO {
 
@@ -18,6 +20,18 @@ public class MissionResponseDTO {
         private Long missionId;
         private Long memberId;
         private MissionStatus status;
+    }
+
+    @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MissionListDto {
+        private Long missionId;
+        private Integer reward;
+        private LocalDate deadline;
+        private String missionSpec;
+        private Long storeId;
     }
 }
 

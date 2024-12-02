@@ -1,8 +1,7 @@
 package umc.spring.study.web.dto;
 
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 public class MissionRequestDTO {
     @Getter
@@ -14,5 +13,13 @@ public class MissionRequestDTO {
         @NotNull
         private Long storeId;
 
+    }
+
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MissionListRequestDto {
+        private Long storeId;
+        private int page;
     }
 }

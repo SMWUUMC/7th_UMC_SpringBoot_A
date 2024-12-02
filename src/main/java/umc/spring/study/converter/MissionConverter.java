@@ -9,6 +9,9 @@ import umc.spring.study.repository.StoreRepository.StoreRepository;
 import umc.spring.study.web.dto.MissionRequestDTO;
 import umc.spring.study.web.dto.MissionResponseDTO;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class MissionConverter {
 
@@ -54,6 +57,24 @@ public class MissionConverter {
                 .memberId(memberMission.getMember().getId())
                 .status(memberMission.getStatus())
                 .build();
+    }
+
+    // 9주차 미션2 : 특정가게의 미션 조회
+    // 개별 미션을 MissionListDto로 변환
+    public MissionResponseDTO.MissionListDto toMissionListDto(Mission mission) {
+        return MissionResponseDTO.MissionListDto.builder()
+                .missionId(mission.getId())
+                .reward(mission.getReward())
+                .deadline(mission.getDeadline())
+                .missionSpec(mission.getMissionSpec())
+                .build();
+    }
+
+    // 미션 목록을 MissionListDto 목록으로 변환
+    public List<MissionResponseDTO.MissionListDto> toMissionListDtoList(List<Mission> missionList) {
+        return missionList.stream()
+                .map(this::toMissionListDto)
+                .collect(Collectors.toList());
     }
 
 }
