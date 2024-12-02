@@ -24,4 +24,14 @@ public class ReviewRequestDTO {
 
         List<String> images;
     }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    public static class ReviewGetRequestDTO {
+
+        private Long userId;
+        private int page;
+
+    }
 }
