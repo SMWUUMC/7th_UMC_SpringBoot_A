@@ -40,7 +40,8 @@ public class ReviewConverter {
     }
 
     // 리뷰 목록을 DTO로 변환
-    public static ReviewResponseDTO.ReviewPreViewListDTO reviewPreViewListDTO(List<Review> reviewList, long totalElements, int totalPages, boolean isFirst, boolean isLast) {
+    public static ReviewResponseDTO.ReviewPreViewListDTO reviewPreViewListDTO
+    (List<Review> reviewList, long totalElements, int totalPages, boolean isFirst, boolean isLast) {
         List<ReviewResponseDTO.ReviewPreViewDTO> reviewPreViewDTOS = reviewList.stream()
                 .map(ReviewConverter::reviewPreViewDTO)
                 .collect(Collectors.toList());

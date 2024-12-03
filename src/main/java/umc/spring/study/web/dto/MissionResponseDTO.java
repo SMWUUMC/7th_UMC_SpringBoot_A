@@ -33,5 +33,6 @@ public class MissionResponseDTO {
         private String missionSpec;
         private Long storeId;
     }
+
 }
 

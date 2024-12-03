@@ -65,4 +65,28 @@ public class MissionRestController {
         // 조회된 미션 목록을 DTO로 변환하여 응답
         return ApiResponse.onSuccess(missionConverter.toMissionListDtoList(missionPage.getContent()));
     }
+
+    // 9주차 미션3 : 내가 진행 중인 미션 목록 조회
+    @GetMapping("/progress")
+    @Operation(summary = "내가 진행 중인 미션 목록 조회", description = "사용자가 진행 중인 미션 목록을 페이징 처리하여 조회하는 API입니다.")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200", description = "OK, 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH003", description = "토큰이 필요합니다.", content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH004", description = "토큰 만료", content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "토큰 형식 오류", content = @Content(schema = @Schema(implementation = ApiResponse.class)))
+    })
+    @Parameters({
+            @Parameter(name = "userId", description = "사용자 ID", required = true),
+            @Parameter(name = "page", description = "조회할 페이지 번호", required = true)
+    })
+    public ApiResponse<List<MissionResponseDTO.MissionListDto>> getMyProgressMissions(
+            @RequestParam(name = "userId") Long userId,
+            @RequestParam(name = "page") Integer page) {
+
+        // 사용자의 진행 중인 미션 목록을 페이징 처리하여 조회
+        Page<Mission> missionPage = missionQueryService.getMissionsInProgressByUserId(userId, page);
+
+        // 조회된 미션 목록을 DTO로 변환하여 응답
+        return ApiResponse.onSuccess(missionConverter.toMissionListDtoList(missionPage.getContent()));
+    }
 }

@@ -19,7 +19,7 @@ public class ReviewQueryServiceImpl implements ReviewQueryService {
     @Override
     public Page<Review> getReviewsByUser(Long userId, Integer page) {
         // Member 조회 예외처리 부분 제거
-        Member member = memberRepository.findById(userId).get();  // 예외처리 없이 바로 조회
+        Member member = memberRepository.findById(userId).get();
 
         // Member를 기준으로 리뷰 목록을 페이징 처리하여 반환
         return reviewRepository.findAllByMember(member, PageRequest.of(page - 1, 10));

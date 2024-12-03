@@ -22,4 +22,12 @@ public class MissionRequestDTO {
         private Long storeId;
         private int page;
     }
+
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MyMissionListRequestDto {
+        private Long userId;
+        private int page;
+    }
 }

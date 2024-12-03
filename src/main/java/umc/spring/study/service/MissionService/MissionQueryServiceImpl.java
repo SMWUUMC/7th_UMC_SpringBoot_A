@@ -18,4 +18,10 @@ public class MissionQueryServiceImpl implements MissionQueryService {
         // 특정 가게의 미션 목록을 페이징 처리하여 반환
         return missionRepository.findByStoreId(storeId, PageRequest.of(page - 1,  10));
     }
+
+    @Override
+    public Page<Mission> getMissionsInProgressByUserId(Long userId, int page) {
+        // 사용자 ID에 맞는 진행 중인 미션을 페이징 처리하여 반환
+        return missionRepository.findMissionsInProgressByUserId(userId, PageRequest.of(page - 1, 10));
+    }
 }
