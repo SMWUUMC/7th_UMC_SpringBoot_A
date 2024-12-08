@@ -22,6 +22,7 @@ import study.service.MissionService.MissionQueryService;
 import study.service.ReviewService.ReviewCommandService;
 import study.service.ReviewService.ReviewQueryService;
 import study.service.StoreService.StoreCommandService;
+import study.validation.annotation.CheckPage;
 import study.validation.annotation.ExistStore;
 import study.web.dto.*;
 
@@ -62,7 +63,7 @@ public class StoreRestController {
     @Parameters({
             @Parameter(name = "storeId", description = "가게의 아이디, path variable 입니다!")
     })
-    public ApiResponse<MissionResponseDTO.MissionDetailListDto> getMissionList(@ExistStore @PathVariable("store_id") Long storeId,@RequestParam(name = "page") Pageable pageable) {
+    public ApiResponse<MissionResponseDTO.MissionDetailListDto> getMissionList(@ExistStore @PathVariable("store_id") Long storeId, @CheckPage Pageable pageable) {
         Page<Mission> page = missionQueryService.findMissionListByStore(storeId, pageable);
         return ApiResponse.onSuccess(MissionConverter.toMissionDetailListDto(page));
     }
