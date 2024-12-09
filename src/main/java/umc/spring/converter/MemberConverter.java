@@ -2,6 +2,7 @@ package umc.spring.converter;
 
 import umc.spring.domain.Member;
 import umc.spring.domain.enums.Gender;
+import umc.spring.dto.MemberRequestDTO;
 import umc.spring.dto.MemberResponseDTO;
 
 import java.time.LocalDateTime;
@@ -14,7 +15,7 @@ public class MemberConverter {
                 .createdAt(LocalDateTime.now())
                 .build();
     }
-    public static Member toMember(MemberResponseDTO.JoinResultDTO request) {
+    public static Member toMember(MemberRequestDTO.JoinDTO request) {
         Gender gender = null;
 
         switch (request.getGender()){
