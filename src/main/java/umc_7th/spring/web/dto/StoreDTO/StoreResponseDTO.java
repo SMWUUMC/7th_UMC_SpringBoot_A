@@ -32,7 +32,7 @@ public class StoreResponseDTO {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class ReviewPreViewListDTO {
+    public static class ReviewPreViewListDTO { // 특정 가게의 리뷰 목록 조회하기 API
         List<ReviewPreViewDTO> reviewList;
         Integer listSize;
         Integer totalPage;
@@ -40,7 +40,6 @@ public class StoreResponseDTO {
         Boolean isFirst;
         Boolean isLast;
     }
-
     @Builder
     @Getter
     @NoArgsConstructor
@@ -50,5 +49,27 @@ public class StoreResponseDTO {
         Float score;
         String body;
         LocalDate createdAt;
+    }
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MissionPreViewDTO { // 2. 특정 가게의 미션 목록 조회하기 API
+        String storeName;
+        Integer reward;
+        String missionSpec;
+        LocalDate createdAt;
+    }
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MissionPreViewListDTO {
+        List<MissionPreViewDTO> missionList;
+        Integer listSize;
+        Integer totalPage;
+        Long totalElements;
+        Boolean isFirst;
+        Boolean isLast;
     }
 }
