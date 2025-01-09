@@ -30,6 +30,11 @@ public class SecurityConfig {
                         .logoutUrl("/logout") // /logout 경로로 처리
                         .logoutSuccessUrl("/login?logout") // 성공 시, 리다이렉트
                         .permitAll()
+                )
+                .oauth2Login(oauth2 -> oauth2
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/home", true)
+                        .permitAll()
                 );
 
         return http.build();
